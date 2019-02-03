@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<touristVouchers
+        xmlns="https://www.w3schools.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.w3schools.com touristVouchersSchema.xsd">
+    <voucher id="1" type="rest">
+        <country>Italy</country>
+        <date>2019-02-10</date>
+        <duration unit="days">6</duration>
+        <transport>air</transport>
+        <cost currency="USD">600</cost>
+        <hotelCharacteristics stars="4" tv="Samsung" conditioner="LG">
+            <hotelName>Hilton</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="2" type="rest">
+        <country>Italy</country>
+        <date>2019-02-20</date>
+        <duration unit="days">6</duration>
+        <transport>air</transport>
+        <cost currency="USD">600</cost>
+        <hotelCharacteristics stars="4">
+            <hotelName>Radisson</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>3</persons>
+        </hotelCharacteristics>
+    </voucher>
+</touristVouchers>
