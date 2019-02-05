@@ -109,7 +109,7 @@
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:attribute>
-                        <xs:attribute name="id" type="xs:ID" use="required"/>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

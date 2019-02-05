@@ -4,8 +4,11 @@ import builder.AbstractVoucherBuilder;
 import builder.VoucherBuilderFactory;
 import entity.Voucher;
 import exception.NoSuchParserTypeException;
+import exception.XMLFileNotFoundException;
+import exception.XMLValidationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import validator.XMLValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -44,24 +47,22 @@ public class UploadXMLServlet extends HttpServlet {
         if (request.getContentType() != null) {
             Part filePart = request.getPart("file");
             try (InputStream fileInputStream = filePart.getInputStream()) {
-                //read input stream twice
-                //XMLValidator validator = new XMLValidator();
-                //if (validator.validate(fileInputStream, SCHEMA_PATH)) {
+                XMLValidator validator = new XMLValidator();
+                if (validator.validate(fileInputStream, SCHEMA_PATH)) {
                     String parserType = request.getParameter("parserType");
                     AbstractVoucherBuilder builder = builderFactory.getParser(parserType);
-                    builder.buildSetVouchers(fileInputStream);
-                    List<String> vouchers = new ArrayList<>();
-                    for (Voucher voucher : builder.getVouchers()) {
-                        vouchers.add(voucher.toString());
+                    try (InputStream is = filePart.getInputStream()) {
+                        builder.buildSetVouchers(is);
+                        //TODO output vouchers
+                        request.setAttribute("parserType", parserType);
+                        request.setAttribute("vouchers", builder.getVouchers());
+                        request.getRequestDispatcher(RESULT_PAGE).forward(request, response);
                     }
-                    request.setAttribute("parserType", parserType);
-                    request.setAttribute("vouchers", vouchers);
-                    request.getRequestDispatcher(RESULT_PAGE).forward(request, response);
-                //}
-//            } catch (XMLFileNotFoundException e) {
-//                redirectToErrorPage("Incorrect input file error", e, request, response);
-//            } catch (XMLValidationException e) {
-//                redirectToErrorPage("Input file validation error", e, request, response);
+                }
+            } catch (XMLFileNotFoundException e) {
+                redirectToErrorPage("Incorrect input file error", e, request, response);
+            } catch (XMLValidationException e) {
+                redirectToErrorPage("Input file validation error", e, request, response);
             } catch (NoSuchParserTypeException e) {
                 redirectToErrorPage("Not found xml file in request", null, request, response);
             }
