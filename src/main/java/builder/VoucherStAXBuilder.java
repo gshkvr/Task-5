@@ -1,7 +1,7 @@
 package builder;
 
 import entity.Voucher;
-import parsing.VoucherEnum;
+import entity.VoucherEnum;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;

@@ -3,12 +3,12 @@
     <script type="text/javascript">
         function validate(form) {
             var fileName = form.elements["uploadFile"].value;
-            if (fileName == "") {
+            if (fileName === "") {
                 alert("Choose file!");
                 return false;
             } else {
                 var fileFormat = fileName.substring(fileName.length - 4);
-                if (fileFormat != ".xml") {
+                if (fileFormat !== ".xml") {
                     alert("File format should be .xml!");
                     form.elements["uploadFile"].value = "";
                     return false;

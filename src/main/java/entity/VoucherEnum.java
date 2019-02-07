@@ -1,4 +1,4 @@
-package parsing;
+package entity;
 
 public enum VoucherEnum {
     TOURISTVOUCHERS("touristVouchers"),

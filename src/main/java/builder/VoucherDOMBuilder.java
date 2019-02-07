@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import parsing.VoucherEnum;
+import entity.VoucherEnum;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +24,7 @@ public class VoucherDOMBuilder extends AbstractVoucherBuilder {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             docBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
+            //TODO
             System.err.println("Ошибка конфигурации парсера: " + e);
         }
     }
@@ -84,7 +85,7 @@ public class VoucherDOMBuilder extends AbstractVoucherBuilder {
         return voucher;
     }
 
-    private static String getElementTextContent(Element element, String elementName) {
+    private String getElementTextContent(Element element, String elementName) {
         NodeList nList = element.getElementsByTagName(elementName);
         Node node = nList.item(0);
         return node.getTextContent();

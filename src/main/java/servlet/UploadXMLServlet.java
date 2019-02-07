@@ -2,7 +2,6 @@ package servlet;
 
 import builder.AbstractVoucherBuilder;
 import builder.VoucherBuilderFactory;
-import entity.Voucher;
 import exception.NoSuchParserTypeException;
 import exception.XMLFileNotFoundException;
 import exception.XMLValidationException;
@@ -13,14 +12,9 @@ import validator.XMLValidator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/uploadXML")
 @MultipartConfig
@@ -28,17 +22,43 @@ public class UploadXMLServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(UploadXMLServlet.class);
     private final VoucherBuilderFactory builderFactory = VoucherBuilderFactory.INSTANCE;
     private static final String SCHEMA_PATH = "/touristVouchersSchema.xsd";
+    private static final String CURRENT_SERVLET = "/uploadXML";
+    private static final String START_PAGE = "/index.jsp";
     private static final String RESULT_PAGE = "/WEB-INF/jsp/result.jsp";
-    private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
+    private static final String PARSING_ERROR_PAGE = "/WEB-INF/jsp/parsingError.jsp";
+    private static final String REDIRECT_ERROR = "error";
+    private static final String REDIRECT_RESULT = "result";
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String redirect = (String) session.getAttribute("redirect");
+        if (redirect == null) {
+            redirect = "";
+        }
+        switch (redirect) {
+            case REDIRECT_ERROR:
+                request.setAttribute("errorText", session.getAttribute("errorText"));
+                session.removeAttribute("errorText");
+                session.removeAttribute("redirect");
+                request.getRequestDispatcher(PARSING_ERROR_PAGE).forward(request, response);
+                break;
+            case REDIRECT_RESULT:
+                request.setAttribute("parserType", session.getAttribute("parserType"));
+                request.setAttribute("vouchers", session.getAttribute("vouchers"));
+                session.removeAttribute("parserType");
+                session.removeAttribute("vouchers");
+                session.removeAttribute("redirect");
+                request.getRequestDispatcher(RESULT_PAGE).forward(request, response);
+                break;
+            default:
+                request.getRequestDispatcher(START_PAGE).forward(request, response);
+                break;
+        }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -53,10 +73,11 @@ public class UploadXMLServlet extends HttpServlet {
                     AbstractVoucherBuilder builder = builderFactory.getParser(parserType);
                     try (InputStream is = filePart.getInputStream()) {
                         builder.buildSetVouchers(is);
-                        //TODO output vouchers
-                        request.setAttribute("parserType", parserType);
-                        request.setAttribute("vouchers", builder.getVouchers());
-                        request.getRequestDispatcher(RESULT_PAGE).forward(request, response);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("redirect", REDIRECT_RESULT);
+                        session.setAttribute("parserType", parserType);
+                        session.setAttribute("vouchers", builder.getVouchers());
+                        response.sendRedirect(CURRENT_SERVLET);
                     }
                 }
             } catch (XMLFileNotFoundException e) {
@@ -69,16 +90,18 @@ public class UploadXMLServlet extends HttpServlet {
         } else {
             redirectToErrorPage("Not found xml file in request", null, request, response);
         }
-
-
     }
 
     private void redirectToErrorPage(String errorText, Exception e,
                                      HttpServletRequest request,
                                      HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         LOGGER.error(errorText, e);
-        request.setAttribute("errorText", errorText);
-        request.getRequestDispatcher(ERROR_PAGE).forward(request, response);
+        HttpSession session = request.getSession();
+        session.setAttribute("redirect", REDIRECT_ERROR);
+        session.setAttribute("errorText", errorText);
+        response.sendRedirect(CURRENT_SERVLET);
     }
+
+
 }

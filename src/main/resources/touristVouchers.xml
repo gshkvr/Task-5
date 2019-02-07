@@ -28,4 +28,187 @@
             <persons>3</persons>
         </hotelCharacteristics>
     </voucher>
+
+    <voucher id="3" type="rest">
+        <country>Spain</country>
+        <date>2019-03-20</date>
+        <duration unit="nights">9</duration>
+        <transport>air</transport>
+        <cost currency="BYN">2000</cost>
+        <hotelCharacteristics stars="3" tv="Samsung">
+            <hotelName>Maillot</hotelName>
+            <nutrition>BB</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="4" type="excursion">
+        <country>Portugal</country>
+        <date>2019-03-20</date>
+        <duration unit="days">12</duration>
+        <transport>air</transport>
+        <cost currency="EURO">800</cost>
+        <hotelCharacteristics stars="2" conditioner="LG" tv="LG">
+            <hotelName>Acacia</hotelName>
+            <nutrition>HB</nutrition>
+            <persons>1</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="5" type="rest">
+        <country>Turkey</country>
+        <date>2019-04-20</date>
+        <duration unit="days">14</duration>
+        <transport>air</transport>
+        <cost currency="USD">1200</cost>
+        <hotelCharacteristics stars="5" conditioner="Bosch" tv="Samsung">
+            <hotelName>Vauban</hotelName>
+            <nutrition>BB</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="6" type="weekend">
+        <country>Poland</country>
+        <date>2019-04-20</date>
+        <duration unit="nights">5</duration>
+        <transport>auto</transport>
+        <cost currency="EURO">500</cost>
+        <hotelCharacteristics stars="3">
+            <hotelName>Warsaw</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="7" type="weekend">
+        <country>Lithuania</country>
+        <date>2019-05-20</date>
+        <duration unit="days">3</duration>
+        <transport>railway</transport>
+        <cost currency="EURO">300</cost>
+        <hotelCharacteristics stars="4" conditioner="Bosch">
+            <hotelName>Devillas</hotelName>
+            <nutrition>BB</nutrition>
+            <persons>1</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="8" type="weekend">
+        <country>Latvia</country>
+        <date>2019-05-20</date>
+        <duration unit="nights">5</duration>
+        <transport>auto</transport>
+        <cost currency="EURO">400</cost>
+        <hotelCharacteristics stars="4" conditioner="LG">
+            <hotelName>Opera</hotelName>
+            <nutrition>HB</nutrition>
+            <persons>1</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="9" type="rest">
+        <country>Sweden</country>
+        <date>2019-06-20</date>
+        <duration unit="days">6</duration>
+        <transport>water</transport>
+        <cost currency="EURO">600</cost>
+        <hotelCharacteristics stars="4" tv="LG">
+            <hotelName>Radisson</hotelName>
+            <nutrition>HB</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="10" type="excursion">
+        <country>Russia</country>
+        <date>2019-06-20</date>
+        <duration unit="days">5</duration>
+        <transport>railway</transport>
+        <cost currency="USD">600</cost>
+        <hotelCharacteristics stars="3">
+            <hotelName>Moscow</hotelName>
+            <nutrition>BB</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="11" type="pilgrimage">
+        <country>Israel</country>
+        <date>2019-07-20</date>
+        <duration unit="days">4</duration>
+        <transport>air</transport>
+        <cost currency="USD">1000</cost>
+        <hotelCharacteristics stars="4" conditioner="Samsung">
+            <hotelName>Liberty</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="12" type="rest">
+        <country>Egypt</country>
+        <date>2019-07-20</date>
+        <duration unit="nights">10</duration>
+        <transport>air</transport>
+        <cost currency="USD">800</cost>
+        <hotelCharacteristics stars="4" tv="LG">
+            <hotelName>Pyramid</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="13" type="rest">
+        <country>Vietnam</country>
+        <date>2019-08-20</date>
+        <duration unit="days">14</duration>
+        <transport>air</transport>
+        <cost currency="USD">1300</cost>
+        <hotelCharacteristics stars="4" conditioner="LG">
+            <hotelName>Hanoi</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>1</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="14" type="excursion">
+        <country>Netherlands</country>
+        <date>2019-08-20</date>
+        <duration unit="days">5</duration>
+        <transport>auto</transport>
+        <cost currency="EURO">800</cost>
+        <hotelCharacteristics stars="3">
+            <hotelName>Prince</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="15" type="rest">
+        <country>France</country>
+        <date>2019-09-20</date>
+        <duration unit="days">10</duration>
+        <transport>air</transport>
+        <cost currency="EURO">1400</cost>
+        <hotelCharacteristics stars="3">
+            <hotelName>Republic</hotelName>
+            <nutrition>HB</nutrition>
+            <persons>2</persons>
+        </hotelCharacteristics>
+    </voucher>
+
+    <voucher id="16" type="rest">
+        <country>Ukraine</country>
+        <date>2019-09-20</date>
+        <duration unit="days">10</duration>
+        <transport>railway</transport>
+        <cost currency="USD">500</cost>
+        <hotelCharacteristics stars="5" conditioner="Bosch" tv="LG">
+            <hotelName>Odessa</hotelName>
+            <nutrition>AI</nutrition>
+            <persons>1</persons>
+        </hotelCharacteristics>
+    </voucher>
+
 </touristVouchers>

@@ -1,16 +1,14 @@
-<%--@elvariable id="errorText" type="java.lang.String"--%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Error</title>
     <style>
         .error {
             color: red;
-            font-size: 200%;
         }
     </style>
 </head>
 <body>
-    <p><span class="error"> Error: </span> ${errorText}</p>
+    <h1><span class="error"> Oops! Something went wrong :( </span></h1>
 </body>
 </html>
