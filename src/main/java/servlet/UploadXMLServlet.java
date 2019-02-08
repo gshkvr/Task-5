@@ -3,6 +3,7 @@ package servlet;
 import builder.AbstractVoucherBuilder;
 import builder.VoucherBuilderFactory;
 import exception.NoSuchParserTypeException;
+import exception.VoucherSetBuildingException;
 import exception.XMLFileNotFoundException;
 import exception.XMLValidationException;
 import org.apache.logging.log4j.LogManager;
@@ -78,6 +79,8 @@ public class UploadXMLServlet extends HttpServlet {
                         session.setAttribute("parserType", parserType);
                         session.setAttribute("vouchers", builder.getVouchers());
                         response.sendRedirect(CURRENT_SERVLET);
+                    } catch (VoucherSetBuildingException e) {
+                        redirectToErrorPage("Parsing failure", e, request, response);
                     }
                 }
             } catch (XMLFileNotFoundException e) {
@@ -85,7 +88,7 @@ public class UploadXMLServlet extends HttpServlet {
             } catch (XMLValidationException e) {
                 redirectToErrorPage("Input file validation error", e, request, response);
             } catch (NoSuchParserTypeException e) {
-                redirectToErrorPage("Not found such parser type", null, request, response);
+                redirectToErrorPage("Not found such parser type", e, request, response);
             }
         } else {
             redirectToErrorPage("Not found xml file in request", null, request, response);

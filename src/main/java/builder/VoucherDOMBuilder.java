@@ -1,6 +1,8 @@
 package builder;
 
 import entity.Voucher;
+import exception.VoucherDOMBuilderConstructorException;
+import exception.VoucherSetBuildingException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,19 +20,18 @@ import java.sql.Date;
 public class VoucherDOMBuilder extends AbstractVoucherBuilder {
     private DocumentBuilder docBuilder;
 
-    VoucherDOMBuilder() {
+    VoucherDOMBuilder() throws VoucherDOMBuilderConstructorException {
         super();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             docBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            //TODO
-            System.err.println("Ошибка конфигурации парсера: " + e);
+            throw new VoucherDOMBuilderConstructorException(e);
         }
     }
 
     @Override
-    public void buildSetVouchers(InputStream fileInputStream) {
+    public void buildSetVouchers(InputStream fileInputStream) throws VoucherSetBuildingException {
         Document doc;
         try {
             doc = docBuilder.parse(fileInputStream);
@@ -42,9 +43,9 @@ public class VoucherDOMBuilder extends AbstractVoucherBuilder {
                 vouchers.add(voucher);
             }
         } catch (IOException e) {
-            System.err.println("File error or I/O error: " + e);
+            throw new VoucherSetBuildingException(e);
         } catch (SAXException e) {
-            System.err.println("Parsing failure: " + e);
+            throw new VoucherSetBuildingException(e);
         }
     }
 

@@ -2,6 +2,7 @@ package builder;
 
 import entity.Voucher;
 import entity.VoucherEnum;
+import exception.VoucherSetBuildingException;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -19,7 +20,7 @@ public class VoucherStAXBuilder extends AbstractVoucherBuilder {
     }
 
     @Override
-    public void buildSetVouchers(InputStream inputStream) {
+    public void buildSetVouchers(InputStream inputStream) throws VoucherSetBuildingException {
         String name;
         try {
             XMLStreamReader reader = inputFactory.createXMLStreamReader(inputStream);
@@ -33,8 +34,8 @@ public class VoucherStAXBuilder extends AbstractVoucherBuilder {
                     }
                 }
             }
-        } catch (XMLStreamException ex) {
-            System.err.println("StAX parsing error! " + ex.getMessage());
+        } catch (XMLStreamException e) {
+            throw new VoucherSetBuildingException(e);
         }
     }
 

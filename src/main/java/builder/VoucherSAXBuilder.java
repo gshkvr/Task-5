@@ -2,6 +2,8 @@ package builder;
 
 import entity.Voucher;
 import entity.VoucherEnum;
+import exception.VoucherSAXBuilderConstructorException;
+import exception.VoucherSetBuildingException;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -22,29 +24,25 @@ public class VoucherSAXBuilder extends AbstractVoucherBuilder {
     private EnumSet<VoucherEnum> withText;
     private XMLReader reader;
 
-    VoucherSAXBuilder() {
+    VoucherSAXBuilder() throws VoucherSAXBuilderConstructorException {
         VoucherHandler voucherHandler = new VoucherHandler();
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser = parserFactory.newSAXParser();
             reader = parser.getXMLReader();
             reader.setContentHandler(voucherHandler);
-        } catch (SAXException e) {
-            System.err.print("ошибка SAX парсера: " + e);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+        } catch (SAXException | ParserConfigurationException e) {
+            throw new VoucherSAXBuilderConstructorException(e);
         }
     }
 
     @Override
-    public void buildSetVouchers(InputStream fileInputStream) {
+    public void buildSetVouchers(InputStream fileInputStream) throws VoucherSetBuildingException {
         try {
             InputSource source = new InputSource(fileInputStream);
             reader.parse(source);
-        } catch (SAXException e) {
-            System.err.print("ошибка SAX парсера: " + e);
-        } catch (IOException e) {
-            System.err.print("ошибка I/О потока: " + e);
+        } catch (SAXException | IOException e) {
+            throw new VoucherSetBuildingException(e);
         }
     }
 

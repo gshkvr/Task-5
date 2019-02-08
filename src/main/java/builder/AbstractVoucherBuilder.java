@@ -1,6 +1,7 @@
 package builder;
 
 import entity.Voucher;
+import exception.VoucherSetBuildingException;
 
 import java.io.InputStream;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ public abstract class AbstractVoucherBuilder {
         vouchers = new HashSet<>();
     }
 
-    public abstract void buildSetVouchers(InputStream fileInputStream);
+    public abstract void buildSetVouchers(InputStream fileInputStream) throws VoucherSetBuildingException;
 
     public Set<Voucher> getVouchers() {
         return vouchers;
