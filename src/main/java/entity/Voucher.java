@@ -14,17 +14,9 @@ public class Voucher {
     private int id;
 
     public Voucher() {
-    }
-
-    public Voucher(String country, Date date, Duration duration, String transport, Cost cost, HotelCharacteristics hotelCharacteristics, String type, int id) {
-        this.country = country;
-        this.date = date;
-        this.duration = duration;
-        this.transport = transport;
-        this.cost = cost;
-        this.hotelCharacteristics = hotelCharacteristics;
-        this.type = type;
-        this.id = id;
+        this.duration = new Duration();
+        this.cost = new Cost();
+        this.hotelCharacteristics = new HotelCharacteristics();
     }
 
     public String getCountry() {
@@ -132,14 +124,6 @@ public class Voucher {
         public int hashCode() {
             return Objects.hash(duration, unit);
         }
-
-        @Override
-        public String toString() {
-            return "Duration{" +
-                    "duration=" + duration +
-                    ", unit='" + unit + '\'' +
-                    '}';
-        }
     }
 
     public static class Cost{
@@ -182,14 +166,6 @@ public class Voucher {
         @Override
         public int hashCode() {
             return Objects.hash(cost, currency);
-        }
-
-        @Override
-        public String toString() {
-            return "Cost{" +
-                    "cost=" + cost +
-                    ", currency='" + currency + '\'' +
-                    '}';
         }
     }
 
@@ -268,18 +244,6 @@ public class Voucher {
         public int hashCode() {
             return Objects.hash(hotelName, nutrition, stars, tv, conditioner);
         }
-
-        @Override
-        public String toString() {
-            return "HotelCharacteristics{" +
-                    "hotelName='" + hotelName + '\'' +
-                    ", nutrition='" + nutrition + '\'' +
-                    ", persons=" + persons +
-                    ", stars=" + stars +
-                    ", tv='" + tv + '\'' +
-                    ", conditioner='" + conditioner + '\'' +
-                    '}';
-        }
     }
 
     @Override
@@ -300,19 +264,5 @@ public class Voucher {
     @Override
     public int hashCode() {
         return Objects.hash(country, date, duration, transport, cost, hotelCharacteristics, type, id);
-    }
-
-    @Override
-    public String toString() {
-        return "Voucher{" +
-                "country='" + country + '\'' +
-                ", date=" + date +
-                ", duration=" + duration +
-                ", transport='" + transport + '\'' +
-                ", cost=" + cost +
-                ", hotelCharacteristics=" + hotelCharacteristics +
-                ", type='" + type + '\'' +
-                ", id=" + id +
-                '}';
     }
 }

@@ -16,7 +16,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-@WebServlet("/uploadXML")
+@WebServlet(name = "uploadXMLServlet", urlPatterns = "/uploadXML")
 @MultipartConfig
 public class UploadXMLServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(UploadXMLServlet.class);
@@ -85,7 +85,7 @@ public class UploadXMLServlet extends HttpServlet {
             } catch (XMLValidationException e) {
                 redirectToErrorPage("Input file validation error", e, request, response);
             } catch (NoSuchParserTypeException e) {
-                redirectToErrorPage("Not found xml file in request", null, request, response);
+                redirectToErrorPage("Not found such parser type", null, request, response);
             }
         } else {
             redirectToErrorPage("Not found xml file in request", null, request, response);
