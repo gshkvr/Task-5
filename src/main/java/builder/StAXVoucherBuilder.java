@@ -11,10 +11,10 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.InputStream;
 import java.sql.Date;
 
-public class VoucherStAXBuilder extends AbstractVoucherBuilder {
+public class StAXVoucherBuilder extends AbstractVoucherBuilder {
     private XMLInputFactory inputFactory;
 
-    VoucherStAXBuilder() {
+    StAXVoucherBuilder() {
         super();
         inputFactory = XMLInputFactory.newInstance();
     }

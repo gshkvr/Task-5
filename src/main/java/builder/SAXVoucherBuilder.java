@@ -2,7 +2,7 @@ package builder;
 
 import entity.Voucher;
 import entity.VoucherEnum;
-import exception.VoucherSAXBuilderConstructorException;
+import exception.SAXVoucherBuilderConstructorException;
 import exception.VoucherSetBuildingException;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -18,13 +18,13 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.util.EnumSet;
 
-public class VoucherSAXBuilder extends AbstractVoucherBuilder {
+public class SAXVoucherBuilder extends AbstractVoucherBuilder {
     private Voucher current;
     private VoucherEnum currentEnum;
     private EnumSet<VoucherEnum> withText;
     private XMLReader reader;
 
-    VoucherSAXBuilder() throws VoucherSAXBuilderConstructorException {
+    SAXVoucherBuilder() throws SAXVoucherBuilderConstructorException {
         VoucherHandler voucherHandler = new VoucherHandler();
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -32,7 +32,7 @@ public class VoucherSAXBuilder extends AbstractVoucherBuilder {
             reader = parser.getXMLReader();
             reader.setContentHandler(voucherHandler);
         } catch (SAXException | ParserConfigurationException e) {
-            throw new VoucherSAXBuilderConstructorException(e);
+            throw new SAXVoucherBuilderConstructorException(e);
         }
     }
 

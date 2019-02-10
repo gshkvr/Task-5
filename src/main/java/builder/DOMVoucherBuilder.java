@@ -1,7 +1,7 @@
 package builder;
 
 import entity.Voucher;
-import exception.VoucherDOMBuilderConstructorException;
+import exception.DOMVoucherBuilderConstructorException;
 import exception.VoucherSetBuildingException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 
-public class VoucherDOMBuilder extends AbstractVoucherBuilder {
+public class DOMVoucherBuilder extends AbstractVoucherBuilder {
     private DocumentBuilder docBuilder;
 
-    VoucherDOMBuilder() throws VoucherDOMBuilderConstructorException {
+    DOMVoucherBuilder() throws DOMVoucherBuilderConstructorException {
         super();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             docBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            throw new VoucherDOMBuilderConstructorException(e);
+            throw new DOMVoucherBuilderConstructorException(e);
         }
     }
 
@@ -42,9 +42,7 @@ public class VoucherDOMBuilder extends AbstractVoucherBuilder {
                 Voucher voucher = buildVoucher(studentElement);
                 vouchers.add(voucher);
             }
-        } catch (IOException e) {
-            throw new VoucherSetBuildingException(e);
-        } catch (SAXException e) {
+        } catch (IOException | SAXException e) {
             throw new VoucherSetBuildingException(e);
         }
     }

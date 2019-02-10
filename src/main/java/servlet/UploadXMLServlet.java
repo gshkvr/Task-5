@@ -2,10 +2,7 @@ package servlet;
 
 import builder.AbstractVoucherBuilder;
 import builder.VoucherBuilderFactory;
-import exception.NoSuchParserTypeException;
-import exception.VoucherSetBuildingException;
-import exception.XMLFileNotFoundException;
-import exception.XMLValidationException;
+import exception.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import validator.XMLValidator;
@@ -89,6 +86,8 @@ public class UploadXMLServlet extends HttpServlet {
                 redirectToErrorPage("Input file validation error", e, request, response);
             } catch (NoSuchParserTypeException e) {
                 redirectToErrorPage("Not found such parser type", e, request, response);
+            } catch (SAXVoucherBuilderConstructorException | DOMVoucherBuilderConstructorException e) {
+                redirectToErrorPage("Parser constructor error", e, request, response);
             }
         } else {
             redirectToErrorPage("Not found xml file in request", null, request, response);

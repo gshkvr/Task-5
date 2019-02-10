@@ -156,8 +156,8 @@ public class Voucher {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {return true;}
+            if (o == null || getClass() != o.getClass()) {return false;}
             Cost cost1 = (Cost) o;
             return cost == cost1.cost &&
                     Objects.equals(currency, cost1.currency);
@@ -230,8 +230,8 @@ public class Voucher {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {return true;}
+            if (o == null || getClass() != o.getClass()) {return false;}
             HotelCharacteristics that = (HotelCharacteristics) o;
             return stars == that.stars &&
                     Objects.equals(hotelName, that.hotelName) &&
@@ -248,8 +248,8 @@ public class Voucher {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
         Voucher voucher = (Voucher) o;
         return id == voucher.id &&
                 Objects.equals(country, voucher.country) &&
